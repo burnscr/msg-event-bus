@@ -1,7 +1,7 @@
 """
 This example covers the basic setup of a synchronous event bus.
 """
-from events import EventBus
+from events.bus import EventBus
 
 
 def on_greeting(name: str):

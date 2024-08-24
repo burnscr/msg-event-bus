@@ -2,7 +2,8 @@
 This example covers the basic setup of a synchronous event bus using
 eventful classes.
 """
-from events import EventBus, Eventful, event_listener
+from events import Eventful, event_listener
+from events.bus import EventBus
 
 
 class Greeter(Eventful):

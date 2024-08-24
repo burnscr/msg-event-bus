@@ -4,7 +4,7 @@ This example covers the basic setup of a threaded event bus.
 import time
 from threading import Lock, current_thread
 
-from events import ThreadedEventBus
+from events.bus import ThreadedEventBus
 
 print_lock = Lock()
 

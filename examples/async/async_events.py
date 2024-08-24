@@ -3,7 +3,7 @@ This example covers the basic setup of an asynchronous event bus.
 """
 import asyncio
 
-from events import AsyncEventBus
+from events.bus import AsyncEventBus
 
 
 async def on_async_greeting(name: str):

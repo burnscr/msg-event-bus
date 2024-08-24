@@ -4,7 +4,8 @@ asynchronous eventful classes.
 """
 import asyncio
 
-from events import AsyncEventBus, AsyncEventful, event_listener
+from events import AsyncEventful, event_listener
+from events.bus import AsyncEventBus
 
 
 class Greeter(AsyncEventful):

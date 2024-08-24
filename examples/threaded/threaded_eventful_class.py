@@ -5,7 +5,8 @@ eventful classes.
 import time
 from threading import Lock, current_thread
 
-from events import ThreadedEventBus, Eventful, event_listener
+from events.bus import ThreadedEventBus
+from events import Eventful, event_listener
 
 print_lock = Lock()
 
