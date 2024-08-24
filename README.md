@@ -20,12 +20,12 @@ git clone https://github.com/burnscr/msg-event-bus
 ### Simple Callback
 
 ```python
-import events
+from events.bus import EventBus
 
 def on_greeting(name):
     print(f'Hello, {name}!')
 
-bus = events.EventBus()
+bus = EventBus()
 bus.add_event_callback('greeting', on_greeting)
 bus.emit('greeting', 'world')
 ```
@@ -33,18 +33,19 @@ bus.emit('greeting', 'world')
 ### Eventful Class
 
 ```python
-import events
+from events.bus import EventBus
+from events import Eventful, event_listener
 
-class Greeter(events.Eventful):
+class Greeter(Eventful):
 
-    @events.event_listener('greeting')
+    @event_listener('greeting')
     def on_greeting(self, name):
         print(f'Hello, {name}!')
 
         # also supports emitting new events
         self.emit('done')
 
-bus = events.EventBus()
+bus = EventBus()
 bus.bind_eventful(Greeter())
 bus.emit('greeting', 'world')
 ```
@@ -52,9 +53,9 @@ bus.emit('greeting', 'world')
 ### Callback Priority
 
 ```python
-import events
+from events.bus import EventBus
 
-bus = events.EventBus()
+bus = EventBus()
 
 @bus.on('greeting', priority=2)
 def informal_greeting(name):
