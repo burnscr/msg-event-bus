@@ -16,7 +16,7 @@ from events.abc.eventful import AbstractAsyncEventful, AbstractEventful
 from events.listeners import EventListeners
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable
+    from collections.abc import Iterable, Sequence
     from typing import Any, Callable
 
     FuncT = Callable[..., Any]
@@ -47,7 +47,7 @@ class _BaseEventBus:
         """
         return self.__event_listeners.default_priority
 
-    def get_event_callbacks(self, event: str) -> Iterable[Iterable[FuncT]]:
+    def get_event_callbacks(self, event: str) -> Sequence[Iterable[FuncT]]:
         """
         Retrieve callback functions grouped by priority for an event.
 

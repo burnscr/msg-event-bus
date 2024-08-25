@@ -13,7 +13,7 @@ from typing import TYPE_CHECKING
 from ._utils import unwrap_func
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable
+    from collections.abc import Iterable, Sequence
     from typing import Any, Callable
 
     FuncT = Callable[..., Any]
@@ -50,7 +50,7 @@ class EventListeners:
 
     def __init__(self, default_priority: int) -> None:
         self.default_priority = default_priority
-        self._cached_listeners = {}  # type: dict[str, Iterable[Iterable[FuncT]]]
+        self._cached_listeners = {}  # type: dict[str, Sequence[Iterable[FuncT]]]
         self._sorted_listeners = {}  # type: dict[str, list[_EventListener]]
         self._listener_lock = Lock()
 
@@ -61,7 +61,7 @@ class EventListeners:
             raise TypeError(f'Priority must be an int, not {type(value).__name__}')
         return value
 
-    def get_event_callbacks(self, event: str) -> Iterable[Iterable[FuncT]]:
+    def get_event_callbacks(self, event: str) -> Sequence[Iterable[FuncT]]:
         """
         Retrieve callback functions grouped by priority for an event.
 
