@@ -19,11 +19,7 @@ class DummyAbstractAsyncEventBus(AbstractAsyncEventBus):
 
 
 def callback_a(): pass
-
-
 def callback_b(): pass
-
-
 async def async_callback(): pass
 
 
