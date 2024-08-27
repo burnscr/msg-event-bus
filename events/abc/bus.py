@@ -107,8 +107,8 @@ class _BaseEventBus:
     def _on_dispatch_error(
         event: str,
         error: Exception,
-        args: Any,
-        kwargs: Any
+        args: tuple[Any, ...],
+        kwargs: dict[str, Any]
     ) -> None:
         """
         Event handler invoked whenever an exception is raised when dispatching
