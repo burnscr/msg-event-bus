@@ -30,6 +30,14 @@ class EventfulMeta(ABCMeta):
     __event_listeners__: Iterable[tuple[str, str, int | None]]
 
     def __new__(cls, *args: Any, **kwargs: Any) -> Self:
+        default_priority = kwargs.pop('priority', None)
+
+        if default_priority is not None and not isinstance(default_priority, int):
+            raise TypeError(
+                f'Eventful expects priority to be int, but received '
+                f'{type(default_priority).__name__} instead.'
+            )
+
         new_cls = super().__new__(cls, *args, **kwargs)
 
         listener_funcs = {}  # type: dict[str, FuncT]
@@ -48,6 +56,8 @@ class EventfulMeta(ABCMeta):
 
         for func_name, func_value in listener_funcs.items():
             for event_name, priority in getattr(func_value, '__event_targets__', ()):
+                if priority is None and default_priority is not None:
+                    priority = default_priority
                 event_listeners.append((event_name, func_name, priority))
 
         new_cls.__event_listeners__ = event_listeners
